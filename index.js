@@ -3,47 +3,34 @@ console.log('Loading function');
 
 let doc = require('dynamodb-doc');
 let dynamo = new doc.DynamoDB();
+let AWS = require("aws-sdk");
+let twitter = require('twitter');
 
-/**
- * Provide an event that contains the following keys:
- *
- *   - operation: one of the operations in the switch statement below
- *   - tableName: required for operations that interact with DynamoDB
- *   - payload: a parameter to pass to the operation being performed
- */
 exports.handler = (event, context, callback) => {
-    console.log('wai');
     console.log('Received event:', JSON.stringify(event, null, 2));
 
-    // const operation = event.operation;
+    var encrypted = fs.readFileSync('./encrypted-credentials');
+    AWS.KMS.decrypt({CiphertextBlob: encrypted}, function(err, data) {
+      if (err) {
+        console.log(err, err.stack);
+        context.fail('failed');
+      } else {
+         var decrypted = data['Plaintext'].toString();
+         console.log(decrypted);
+         obj = {};
+         decrypted.split(',').forEach(function(item) {
+           var pair = item.split(':');
+           obj[pair[0]] = pair[1];
+         });
 
-    // if (event.tableName) {
-    //     event.payload.TableName = event.tableName;
-    // }
+         var client = new Twitter({
+           consumer_key: obj.consumer_key,
+           consumer_secret: obj.consumer_secret,
+           access_token_key: obj.access_token_key,
+           access_token_secret: obj.access_token_secret
+         });
+         console.log(client);
 
-    // switch (operation) {
-    //     case 'create':
-    //         dynamo.putItem(event.payload, callback);
-    //         break;
-    //     case 'read':
-    //         dynamo.getItem(event.payload, callback);
-    //         break;
-    //     case 'update':
-    //         dynamo.updateItem(event.payload, callback);
-    //         break;
-    //     case 'delete':
-    //         dynamo.deleteItem(event.payload, callback);
-    //         break;
-    //     case 'list':
-    //         dynamo.scan(event.payload, callback);
-    //         break;
-    //     case 'echo':
-    //         callback(null, event.payload);
-    //         break;
-    //     case 'ping':
-    //         callback(null, 'pong');
-    //         break;
-    //     default:
-    //         callback(new Error(`Unrecognized operation "${operation}"`));
-    // }
+      }
+    });
 };
