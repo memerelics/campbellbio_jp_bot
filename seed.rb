@@ -29,7 +29,8 @@ items.each.with_index do |line, i|
   chapter, page, text = line.split(',')
 
   puts text
-  tweets = text_to_tweets(text, 130)
+  # at maximum: "@campbellbio_jp <content> (ch.xx, p.xxxx)".length #=> 32
+  tweets = text_to_tweets(text, 108)
   puts "text.length: #{text.length} -> #{tweets.map{|t| t.length}}"
 
   tweets.each.with_index do |t, seq_index|
