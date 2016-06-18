@@ -1,9 +1,11 @@
 require 'bundler'
 Bundler.require
 require 'pp'
+require 'pry'
 
 table  = ENV['TABLE']
 dynamo = Aws::DynamoDB::Client.new(region: 'ap-northeast-1')
+wcu    = dynamo.describe_table(table_name: table).table.provisioned_throughput.write_capacity_units
 # pp dynamo.public_methods(false)
 
 items = open('./data.txt').read.split("\n")
@@ -38,5 +40,5 @@ items.each.with_index do |line, i|
                     item: {text_id: i + 1, seq_id: seq_index,
                            chapter: chapter, page: page, text: t})
   end
-  sleep 1
+  sleep 1 if (i % wcu).zero?
 end
