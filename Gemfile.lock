@@ -12,11 +12,14 @@ GEM
       json_pure (>= 1.8.1)
     json_pure (1.8.3)
     method_source (0.8.2)
+    oauth (0.5.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
     slop (3.6.0)
+    twurl (0.9.3)
+      oauth (~> 0.4)
 
 PLATFORMS
   ruby
@@ -24,6 +27,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   pry
+  twurl
 
 BUNDLED WITH
    1.11.2

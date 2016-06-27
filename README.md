@@ -25,3 +25,29 @@ zip -r index.zip index.js encrypted-credentials node_modules
 aws lambda update-function-code --function-name $FUNC --zip-file fileb://`pwd`/index.zip
 aws lambda invoke --function-name $FUNC out.log
 ```
+
+upload media
+
+```
+$ bundle exec twurl -H upload.twitter.com -X POST "/1.1/media/upload.json" --file "/Users/hash/Desktop/183.png" --file-field "media"
+{
+    "media_id":747459862989180930,
+    "media_id_string":"747459862989180930",
+    "size":168537,
+    "expires_after_secs":86400,
+    "image": {
+        "image_type":"image\/png",
+        "w":281,
+        "h":382
+    }
+}
+
+$ ed local.js
+client.post('statuses/update', {status: '真核生物の遺伝子発現は多数の段階で制御される (ch.18, p.453)', media_ids: '747463028430430211'},  (err, tweet, response) => {
+
+$ nvm use stable
+$ node local.js
+
+$ data.txt
+> "expanded_url": "http://twitter.com/campbellbio_jp/status/747463474133925888/photo/1",
+```
