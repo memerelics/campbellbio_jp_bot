@@ -26,7 +26,7 @@ aws lambda update-function-code --function-name $FUNC --zip-file fileb://`pwd`/i
 aws lambda invoke --function-name $FUNC out.log
 ```
 
-upload media
+### upload media
 
 ```
 $ bundle exec twurl -H upload.twitter.com -X POST "/1.1/media/upload.json" --file "/Users/hash/Desktop/183.png" --file-field "media"
@@ -50,4 +50,10 @@ $ node local.js
 
 $ data.txt
 > "expanded_url": "http://twitter.com/campbellbio_jp/status/747463474133925888/photo/1",
+```
+
+### upload data
+
+```
+$ TABLE=source-table-name ruby seed.rb
 ```
