@@ -20,7 +20,7 @@ pp dynamo.update_item(table_name: table,
 
 def text_to_tweets(text, cursor)
   if text.length > cursor
-    matched = text[0..cursor].match(/^.+(，|．)/)
+    matched = text[0..cursor].match(/^.+(，|．| )/)
     [matched[0]] + text_to_tweets(text[matched[0].length..-1], cursor)
   else
     [text]
