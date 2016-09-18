@@ -3,5 +3,5 @@ deploy
 node_modules
 *.zip
 *.log
-local.js
 .bundle
+tw.json
