@@ -18,4 +18,5 @@ File.open('tw.json', 'w+'){|f|
   f.write({media: media_id.to_s, tweet: 'TODO'}.to_json)
 }
 
-# => nvm use stable && node local.js
+puts '$ edit tw.json'
+puts '$ nvm use stable && node local.js'

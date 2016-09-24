@@ -32,13 +32,15 @@ kms.decrypt({CiphertextBlob: encrypted}, (err, data) => {
       } else {
         // console.log(tweet);
         console.log(response['body']);
-        console.log('--- body end');
+        console.log('--- body');
         console.log(JSON.parse(response['body'])['entities']);
-        console.log('--- entities end');
-        console.log(JSON.parse(response['body'])['entities']['display_url']);
-        console.log('--- display_url end');
-        console.log(JSON.parse(response['body'])['entities']['display_url'].replace(/\\/,''));
-        console.log('--- replacing display_url end');
+        console.log('--- body > entities');
+        console.log(JSON.parse(response['body'])['entities']['media']);
+        console.log('--- body > entities > media');
+        console.log(JSON.parse(response['body'])['entities']['media'][0]['display_url']);
+        console.log('--- body > entities > media > 0 > display_url');
+        console.log(JSON.parse(response['body'])['entities']['media'][0]['display_url'].replace(/\\/,''));
+        console.log('--- body > entities > media > 0 > display_url.replace');
       }
     });
   }
