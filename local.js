@@ -26,7 +26,8 @@ kms.decrypt({CiphertextBlob: encrypted}, (err, data) => {
     });
 
     var json = JSON.parse(fs.readFileSync("./tw.json", 'utf8'));
-    client.post('statuses/update', {status: json['tweet'], media_ids: json['media']},  (err, tweet, response) => {
+    // media_ids should be separated by comma
+    client.post('statuses/update', {status: json['tweet'], media_ids: json['media_ids']},  (err, tweet, response) => {
       if (err) {
         console.log(err, err.stack);
       } else {
