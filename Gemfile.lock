@@ -20,6 +20,7 @@ GEM
     slop (3.6.0)
     twurl (0.9.3)
       oauth (~> 0.4)
+    unicode (0.4.4.2)
 
 PLATFORMS
   ruby
@@ -28,6 +29,7 @@ DEPENDENCIES
   aws-sdk
   pry
   twurl
+  unicode
 
 BUNDLED WITH
    1.11.2
