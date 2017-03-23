@@ -15,7 +15,8 @@ media_id = result['media_id']
 exit 1 unless media_id
 
 File.open('tw.json', 'w+'){|f|
-  puts media_id
+  puts "media_id: #{media_id}"
+  # media_ids could be comma-separated ids
   f.write({media_ids: media_id.to_s, tweet: ' (ch., p.)'}.to_json)
 }
 
