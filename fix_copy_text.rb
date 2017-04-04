@@ -2,15 +2,15 @@
 require 'bundler'
 Bundler.require
 
-# usage: $ ./fix_copy_text.rb
-# ...paste text here...
-# Ctrl-D
+input = if ARGV[0]
+          open(ARGV[0]).read
+        else
+          puts 'inserted text will be saved as .tmp.input_raw.txt'
+          puts 'result text will be saved as .tmp.output.txt'
+          puts ">>> End with Ctrl-D <<<"
+          $stdin.read
+        end
 
-puts 'inserted text will be saved as .tmp.input_raw.txt'
-puts 'result text will be saved as .tmp.output.txt'
-puts ">>> End with Ctrl-D <<<"
-
-input = $stdin.read
 open('./.tmp.input_raw.txt', 'w+') {|f| f.write input }
 
 output = Unicode::nfkc(input)
