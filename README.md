@@ -57,3 +57,19 @@ $ data.txt
 ```
 $ TABLE=source-table-name ruby seed.rb
 ```
+
+#### check data
+
+```
+$ aws dynamodb scan --table-name $TABLE | \
+  jrq -r '_.Items.map{|item| "ch.%2d (p.%4d): %4d, %2d" % [item.chapter.S, item.page.S, item.text_id.N, item.seq_id.N].map(&:to_i) rescue nil }'
+```
+
+total count
+
+```
+$ aws dynamodb query --table-name $TABLE \
+  --key-condition-expression "text_id = :val" \
+  --expression-attribute-values '{":val": {"N": "0"}}' \
+  --query 'Items[0].count.N'
+```
