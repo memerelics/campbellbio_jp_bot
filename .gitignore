@@ -6,3 +6,4 @@ node_modules
 .bundle
 tw.json
 .tmp.*
+logs/
